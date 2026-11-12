@@ -1,0 +1,4 @@
+# Archivos temporales y secretos: nunca al repositorio
+*.tmp
+.env
+*.log
