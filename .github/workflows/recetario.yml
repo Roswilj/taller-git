@@ -1,0 +1,42 @@
+# Nombre que aparecerá en la pestaña Actions de GitHub.
+name: Validar y empaquetar recetario
+
+# Ejecutar cuando publiquemos cambios en estas ramas.
+on:
+  push:
+    branches:
+      - develop
+      - feature/ci-recetario
+
+# Permite leer el contenido del repositorio.
+permissions:
+  contents: read
+
+# Define los trabajos que realizará GitHub.
+jobs:
+  comprobar:
+    # Utiliza una máquina Linux proporcionada por GitHub.
+    runs-on: ubuntu-latest
+
+    # Ejecuta los siguientes pasos en orden.
+    steps:
+      # Copia el proyecto en esa máquina.
+      - name: Descargar el proyecto
+        uses: actions/checkout@v7
+
+      # Ejecuta nuestro primer script.
+      - name: Validar el recetario
+        run: bash scripts/validar-recetario.sh
+
+      # Si la validación pasó, prepara la entrega.
+      - name: Preparar el paquete
+        run: bash scripts/empaquetar-recetario.sh
+
+      # Guarda la entrega para que podamos descargarla.
+      - name: Guardar el paquete
+        uses: actions/upload-artifact@v7
+        with:
+          name: recetario
+          path: dist/recetario/
+          if-no-files-found: error
+          retention-days: 7
