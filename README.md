@@ -8,6 +8,7 @@ pull request; las versiones se publican desde `main` con un tag.
 - Arepas (recetas/arepas.md)
 - Café (recetas/cafe.md)
 - Café con leche (recetas/cafe-con-leche.md)
+- Flan (recetas/flan.md)
 
 ## Cómo contribuir
 
